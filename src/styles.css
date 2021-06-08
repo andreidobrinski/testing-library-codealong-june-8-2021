@@ -1,0 +1,66 @@
+html {
+  font-size: 62.5%;
+  background: hotpink;
+}
+
+.Form {
+  font-family: "Futura", sans-serif;
+  font-size: 2.5rem;
+  line-height: 1.5;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.form-container {
+  width: 200px;
+  text-align: left;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  background-color: navy;
+}
+
+label {
+  display: block;
+  margin: 20px 0;
+}
+
+input {
+  display: block;
+  line-height: 24px;
+  margin: 10px 0 0;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+}
+
+input:focus {
+  border: 1px solid purple;
+}
+
+.error {
+  color: red;
+  border-color: red;
+  background-color: white;
+}
+
+h2,
+h3 {
+  background: white;
+  padding: 5px 15px;
+}
+
+strong {
+  background: white;
+  padding: 0 10px;
+  display: inline-block;
+}
