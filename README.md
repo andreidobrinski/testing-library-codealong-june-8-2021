@@ -1,5 +1,16 @@
 # Testing library code-along
 
+---
+
+This repo is to follow along with this great codealong:
+
+- [Original codebase](https://github.com/nicolechung/testing-library-codealong)
+- [Event](https://www.meetup.com/torontojs/events/278340348/)
+
+Below is the original README
+
+---
+
 ![Image of form](example.png)
 
 # Installation
