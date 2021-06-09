@@ -83,7 +83,41 @@ describe("Form", () => {
     expect(screen.getByText(/text is invalid/i)).toBeVisible();
   });
 
-  xit("should display a success message with valid data on form submit", async () => {
-    await arrange();
+  it("should display a success message with valid data on form submit", async () => {
+    const responseMock = {
+      date: "2020-02-01",
+      text: "#invalid",
+    };
+
+    await arrange({ responseMock });
+
+    fireEvent.change(screen.getByLabelText(/enter a date:/i), {
+      target: { value: "2020-05-11" },
+    });
+    fireEvent.change(
+      screen.getByRole("textbox", {
+        name: /enter good text/i,
+      }),
+      {
+        target: { value: "Something good" },
+      }
+    );
+
+    act(() => {
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /submit/i,
+        })
+      );
+    });
+
+    expect(screen.queryByText(/date is invalid/i)).toBeNull();
+    expect(screen.queryByText(/text is invalid/i)).toBeNull();
+
+    expect(
+      screen.getByRole("heading", {
+        name: /form was submitted successfully!/i,
+      })
+    ).toBeVisible();
   });
 });
