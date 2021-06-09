@@ -25,6 +25,8 @@ describe("Form", () => {
     getItemSpy = jest
       .spyOn(global.Storage.prototype, "getItem")
       .mockReturnValue("hello");
+    const dateNowStub = jest.fn(() => new Date("2020-04-30").valueOf());
+    global.Date.now = dateNowStub;
   });
 
   afterEach(() => {
@@ -33,6 +35,8 @@ describe("Form", () => {
 
   afterAll(() => {
     delete global.fakeThirdPartyJSLibrary;
+    const realDateNow = Date.now.bind(global.Date);
+    global.Date.now = realDateNow;
   });
 
   it("should render, fetch data from the api, localstorage and globals and display the data", async () => {
@@ -59,8 +63,24 @@ describe("Form", () => {
     ).toEqual("#invalid");
   });
 
-  xit("should display errors with invalid data and prevent form submit", async () => {
-    await arrange();
+  it("should display errors with invalid data and prevent form submit", async () => {
+    const responseMock = {
+      date: "2020-02-01",
+      text: "#invalid",
+    };
+
+    await arrange({ responseMock });
+
+    act(() => {
+      fireEvent.click(
+        screen.getByRole("button", {
+          name: /submit/i,
+        })
+      );
+    });
+
+    expect(screen.getByText(/date is invalid/i)).toBeVisible();
+    expect(screen.getByText(/text is invalid/i)).toBeVisible();
   });
 
   xit("should display a success message with valid data on form submit", async () => {
